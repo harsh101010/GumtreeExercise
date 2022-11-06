@@ -11,7 +11,7 @@ class AddressBookServiceTest {
 
     @BeforeEach
     void setUp() {
-        addressBookService = new AddressBookService();
+        addressBookService = new AddressBookService("addressbook.txt");
     }
 
     @Test
