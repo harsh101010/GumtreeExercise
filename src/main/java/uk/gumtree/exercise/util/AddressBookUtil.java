@@ -27,6 +27,7 @@ public class AddressBookUtil {
                     .map(strArray -> new Person(strArray[0].strip(),
                                             Gender.getGenderFromString(strArray[1].strip()),
                                             LocalDate.parse(strArray[2].strip(), dateTimeFormatter)))
+                    .map(Person::resolveActualBirthYear)
                     .toList();
         } catch (IOException | URISyntaxException | NullPointerException | DateTimeParseException e) {
             throw new IllegalAddressBookException(e);
