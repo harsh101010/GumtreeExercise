@@ -29,7 +29,7 @@ public class AddressBookUtil {
                                             LocalDate.parse(strArray[2].strip(), dateTimeFormatter)))
                     .map(Person::resolveActualBirthYear)
                     .toList();
-        } catch (IOException | URISyntaxException | NullPointerException | DateTimeParseException e) {
+        } catch (IOException | URISyntaxException | NullPointerException | DateTimeParseException| IllegalAddressBookException e) {
             throw new IllegalAddressBookException(e);
         }
     }

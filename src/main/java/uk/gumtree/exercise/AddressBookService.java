@@ -36,4 +36,22 @@ public class AddressBookService {
         return people.stream().min(Comparator.comparing(Person::getDob));
     }
 
+    /**
+     * If by any change, there are multiple entries for firstPersonName or secondPersonName in the addressBook,
+     * the method will pick first two entries and calculate difference between dob. rest of the entries will be ignored
+     * @param firstPersonName first person name
+     * @param secondPersonName second person name
+     * @return age difference in days
+     */
+    public long ageDifferenceBetweenTwoPeople(String firstPersonName, String secondPersonName){
+
+        String pattern = String.format(".*(%s|%s).*", firstPersonName, secondPersonName);
+
+        return people
+                .stream()
+                .filter(person -> person.getName().matches(pattern))
+                .limit(2)
+                .mapToLong(p -> p.getDob().toEpochDay())
+                .reduce(0, (x, y) ->Math.abs(x-y));
+    }
 }
